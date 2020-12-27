@@ -1,0 +1,161 @@
+{
+    "team1":{
+    "teamName": "Turi unterwegs mit Freunden",  
+    "categorie": "A", 
+    "capitain":  
+        {   
+            "salutation" : "Herr",
+            "lastname": "Dörig",
+            "firstname": "Thomas",
+            "adress": "Alte Sägestrasse 4",
+            "plz": "9050",
+            "ort": "Appenzell",
+            "email": "doerig.thomas@gmail.com",
+            "telnr": "0795390990"
+        },
+    "teamMate1": 
+        {
+            "lastname": "Dörig",
+            "firstname": "Thomas",
+            "gender": "m",
+            "birthdate": "1990",
+            "footballer": "ja"
+        },
+    "teamMate2": 
+        {
+            "lastname": "Manser",
+            "firstname": "Iwan",
+            "gender": "m",
+            "birthdate": "1989",
+            "footballer": "ja"
+        },
+    "teamMate3": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate4": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate5": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate6": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate7": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate8": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        }  
+    },
+    
+    "team2":{
+    "teamName": "Die wilden Girls",  
+    "categorie": "A", 
+    "capitain":  
+        {
+            "lastname": "Stomeo",
+            "firstname": "Vanessa",
+            "adress": "Säntisblick 5",
+            "plz": "9215",
+            "ort": "Schönenberg an der Thur",
+            "email": "vanystomeo@gmx.ch",
+            "telnr": "0795330000"
+        },
+    "teamMate1": 
+        {
+            "salutation" : "Frau",
+            "lastname": "Stomeo",
+            "firstname": "Vanessa",
+            "gender": "w",
+            "birthdate": "1988",
+            "footballer": "nein"
+        },
+    "teamMate2": 
+        {
+            "lastname": "Kostic",
+            "firstname": "Sara",
+            "gender": "w",
+            "birthdate": "1989",
+            "footballer": "nein"
+        },
+    "teamMate3": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate4": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate5": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate6": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate7": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        },
+    "teamMate8": 
+        {
+            "lastname": "",
+            "firstname": "",
+            "gender": "",
+            "birthdate": "",
+            "footballer": ""
+        } 
+    }
+}
