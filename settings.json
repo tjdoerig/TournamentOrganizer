@@ -1,0 +1,13 @@
+{
+    "infrastructureParameters":  
+        {   
+        "playingFields": "4"
+         },
+    "gameParamter":  
+        {   
+            "playtimeFriday": "9",  
+            "breaktimeFriday": "2",
+            "playtime": "12",  
+            "breaktime": "2"
+        }    
+}
