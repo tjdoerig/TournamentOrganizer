@@ -1,7 +1,28 @@
-'''
 import os, sys, sqlite3
 from sqlite3 import Error   
 import Parameter
+
+"""
+Klasse DbHandler
+    addTeam(teamName)
+    addCapitain(anrede, Name,Vorname,Adresse,plz,ort,telefonnummer,kategorie)
+    getTeam(teamName)
+"""
+
+class dbHanlder:
+    def __init__(self):
+        self.connection = sqlite3.connect(Parameter.dbPfad)
+        cursor = connection.cursor()
+
+    def __del__(self):
+        self.connection.close()
+
+    def addTeam(self,teamName):
+        #Check
+        assert(isinstance(teamName,str))
+
+        
+
 
 def CreateDB():
     #Angaben Teammates
@@ -10,9 +31,7 @@ def CreateDB():
     connection = sqlite3.connect(Parameter.dbPfad)
     cursor = connection.cursor()
     # Tabelle erzeugen
-    sql = """
-        CREATE TABLE personen (
-        TimeStampAnmeldung DATE, 
+    sql = CREATE TABLE personen (
         EMailadresseCapitain STRING, 
         Anrede STRING,
         Name STRING,
@@ -23,34 +42,20 @@ def CreateDB():
         Telefonnummer STRING,
         TournamentCategory STRING, 
         TeamName STRING,
-        player1name = STRING,
-        player1vorname = STRING,
-        player1geschlecht = STRING,
-        player1jahrgang = STRING,
-        player1fussballspieler = STRING,
-        player2name = STRING,
-        player2vorname = STRING,
-        player2geschlecht = STRING,
-        player2jahrgang = STRING,
-        player2fussballspieler = STRING,
-        player3name = STRING,
-        player3vorname = STRING,
-        player3geschlecht = STRING,
-        player3jahrgang = STRING,
-        player3fussballspieler = STRING,
-    );"""
+        player1name STRING,
+        player1vorname STRING,
+        player1geschlecht STRING,
+        player1jahrgang INT,
+        player1fussballspieler BOOL,
+    )
 
     cursor.execute(sql)
     connection.close()
 
-
 # Existenz der Datenbank überprüfen und ggf. diese anlegen
 if not os.path.exists(Parameter.dbName):
     print("Datenbank " + Parameter.dbName + ".db nicht vorhanden - Datenbank wird anglegt.")
-    #CreateDB()
-
-
-  
+    CreateDB()
 
     def CreateConnection(dbPfad):
         try:
@@ -88,4 +93,4 @@ if not os.path.exists(Parameter.dbName):
 Databaseinstanz = Database()
 
 Database.ReadData()
-'''
+

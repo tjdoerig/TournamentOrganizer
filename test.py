@@ -2,7 +2,7 @@
 import os, sys, sqlite3
 from sqlite3 import Error   
 
-dbName = "chinook.ds"
+dbName = "chinook.db"
 dbSpeicherpfad = "/Users/thomas/Documents/Programmierung/GitHub/TournamentAdministrator/"
 dbPfad = dbSpeicherpfad + dbName
 
