@@ -1,0 +1,66 @@
+@startuml C4_P3_Token_API
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Token Management and API Data Processing - SwissAssetReport (mit Repositories und DB-Verbindungen)
+
+AddElementTag("Database", $bgColor="LightYellow", $fontColor="black", $legendText="Database")
+
+Container_Boundary(s1, "SwissAssetReport System") {
+
+    ' Domain Layer: enthält die Entitäten und Repository-Interfaces
+    Container_Boundary(DomainLayer, "Domain Layer") {
+        Component(Entities, "Entities", "C#", "Domänen-Entitäten und Logik")
+        Component(IRepository, "IRepository", "Interface", "Interface für Repository-Zugriff in der Domäne")
+    }
+    
+    ' Application Layer: enthält Commands, Queries und deren Handler
+    Container_Boundary(ApplicationLayer, "Application Layer") {
+        Component(TokenCommands, "Token Commands", "C#", "Command zum Hinzufügen/Verwalten von Tokens")
+        Component(DataQueries, "Data Queries", "C#", "Query zum Abrufen der Vermögensdaten")
+        Component(CommandHandler, "Command Handler", "C#", "Verarbeitet Commands")
+        Component(QueryHandler, "Query Handler", "Verarbeitet Queries und verwendet Repositories")
+    }
+    
+    ' Infrastructure Layer: enthält die API-Connectoren, den Data Processor und den Datenzugriff
+    Container_Boundary(InfrastructureLayer, "Infrastructure Layer") {
+        Component(TokenRepository, "Token Repository", "Implementiert den Datenzugriff auf die SQL DB")
+        Component(KustoRepository, "Kusto Repository", "Implementiert den Datenzugriff auf die Kusto DB")
+        Component(APIConnectorFactory, "API Connector Factory", "Erstellt API-Connectoren basierend auf Plattform")
+        
+        Container_Boundary(APIConnectors, "API Connectors") {
+            Component(BinanceAPI, "Binance API Connector", "Kommuniziert mit der Binance API")
+            Component(CoinbaseAPI, "Coinbase API Connector", "Kommuniziert mit der Coinbase API")
+            Component(BankAPI, "Bank API Connector", "Kommuniziert mit verschiedenen Banken-APIs")
+        }
+
+        Component(DataProcessor, "Data Processor", "Normalisiert Daten und verwendet Repositories für DB-Zugriff")
+    }
+    
+    Component(SQLDB, "Azure SQL DB", "Database", "Speichert Tokens und verarbeitete Daten", $tags="Database")
+    Component(KustoDB, "Azure Kusto DB", "Database", "Speichert API-Transaktionsdaten", $tags="Database")
+}
+
+Person(User, "User", "Benutzer gibt API-Tokens ein und möchte seine Daten abfragen")
+
+' Verbindungen zwischen den Komponenten
+Rel(User, TokenCommands, "Gibt API-Tokens ein")
+Rel(TokenCommands, CommandHandler, "Leitet Command zum Speichern von Tokens weiter")
+Rel(CommandHandler, TokenRepository, "Speichert Token in SQL DB")
+Rel(APIConnectorFactory, TokenRepository, "Liest Token für API-Verbindung")
+Rel(APIConnectorFactory, BinanceAPI, "Erstellt Binance API Connector")
+Rel(APIConnectorFactory, CoinbaseAPI, "Erstellt Coinbase API Connector")
+Rel(APIConnectorFactory, BankAPI, "Erstellt Bank API Connector")
+Rel(BinanceAPI, DataProcessor, "Ruft Binance-Daten ab")
+Rel(CoinbaseAPI, DataProcessor, "Ruft Coinbase-Daten ab")
+Rel(BankAPI, DataProcessor, "Ruft Bankdaten ab")
+Rel(DataProcessor, TokenRepository, "Speichert verarbeitete Daten in SQL DB (über Repository)")
+Rel(DataProcessor, KustoRepository, "Speichert API-Transaktionsdaten in Kusto DB")
+Rel(User, DataQueries, "Fragt Vermögensdaten ab")
+Rel(DataQueries, QueryHandler, "Verarbeitet Query und verwendet Repositories")
+Rel(QueryHandler, TokenRepository, "Liest verarbeitete Daten aus SQL DB")
+Rel(QueryHandler, KustoRepository, "Liest Transaktionsdaten aus Kusto DB")
+
+' Repository-Verbindungen zu den Datenbanken
+Rel(TokenRepository, SQLDB, "Liest/verarbeitet Daten")
+Rel(KustoRepository, KustoDB, "Liest/verarbeitet Transaktionsdaten")
+@enduml

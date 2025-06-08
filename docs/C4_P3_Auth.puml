@@ -1,0 +1,51 @@
+@startuml C4_P3_Auth
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Authentifizierung in der 3-Layer-Architektur - Mit User-Speicherung und externen APIs
+
+AddElementTag("OAuth2Provider", $bgColor="LightBlue", $fontColor="black", $legendText="OAuth2 Provider")
+AddElementTag("Database", $bgColor="LightYellow", $fontColor="black", $legendText="Database")
+
+Container_Boundary(s1, "SwissAssetReport System") {
+
+    ' Domain Layer: enthält User und Token Entitäten
+    Container_Boundary(DomainLayer, "Domain Layer") {
+        Component(UserEntity, "User", "C#", "Benutzer-Entität in der Domain")
+        Component(TokenEntity, "Token", "C#", "OAuth2 Token-Entität in der Domain")
+    }
+
+    ' Application Layer: Commands und Queries
+    Container_Boundary(ApplicationLayer, "Application Layer") {
+        Component(AuthCommandHandler, "Auth Command Handler", "C#", "Verarbeitet Authentifizierungsbefehle")
+        Component(ValidateTokenQueryHandler, "Token Validation Query Handler", "C#", "Validiert OAuth2 Token-Authentifizierungen")
+    }
+
+    ' Infrastructure Layer: API-Connectoren, Blazor Session und Token-Verifikation
+    Container_Boundary(InfrastructureLayer, "Infrastructure Layer") {
+        Component(OAuth2TokenVerifier, "OAuth2 Token Verifier", "C#", "Verifiziert OAuth2 Tokens")
+        Component(BlazorSessionManager, "Blazor Session Manager", "Blazor", "Integrierter Sitzungsmanager von Blazor")
+        Component(UserRepository, "User Repository", "C#", "Speichert und lädt Benutzerdaten")
+        Component(UserDB, "User Database", "SQL", "Speichert die Benutzerdaten", $tags="Database")
+        
+        Container_Boundary(OAuth2Providers, "OAuth2 Providers (Externe APIs)") {
+            Component(GoogleOAuth, "Google OAuth", "OAuth2", "Google OAuth2 Provider API (extern)", $tags="OAuth2Provider")
+            Component(MicrosoftOAuth, "Microsoft OAuth", "OAuth2", "Microsoft OAuth2 Provider API (extern)", $tags="OAuth2Provider")
+            Component(GitHubOAuth, "GitHub OAuth", "OAuth2", "GitHub OAuth2 Provider API (extern)", $tags="OAuth2Provider")
+        }
+    }
+}
+
+Person(EndUser, "End User", "Person, die sich authentifizieren möchte")
+
+' Verbindungen
+Rel(EndUser, AuthCommandHandler, "Meldet sich an via OAuth2")
+Rel(AuthCommandHandler, OAuth2TokenVerifier, "Überprüft den OAuth2 Token")
+Rel(OAuth2TokenVerifier, GoogleOAuth, "Validiert Google OAuth Token über API")
+Rel(OAuth2TokenVerifier, MicrosoftOAuth, "Validiert Microsoft OAuth Token über API")
+Rel(OAuth2TokenVerifier, GitHubOAuth, "Validiert GitHub OAuth Token über API")
+Rel(AuthCommandHandler, BlazorSessionManager, "Verwaltet Sitzungen nach erfolgreicher Authentifizierung")
+Rel(BlazorSessionManager, EndUser, "Verwaltet Benutzersitzung")
+Rel(AuthCommandHandler, UserRepository, "Speichert oder lädt Benutzer-Entität")
+Rel(UserRepository, UserDB, "Speichert Benutzer in der Datenbank")
+
+@enduml

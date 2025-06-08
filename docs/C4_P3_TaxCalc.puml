@@ -1,0 +1,45 @@
+@startuml C4_P3_TaxCalc
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Tax Calculation Service - SwissAssetReport (mit einer SQL DB)
+
+AddElementTag("Database", $bgColor="LightYellow", $fontColor="black", $legendText="Database")
+
+Container_Boundary(s1, "SwissAssetReport System") {
+
+    ' Domain Layer: enthält die Steuer-Entitäten
+    Container_Boundary(DomainLayer, "Domain Layer") {
+        Component(TaxCalculationEntity, "Tax Calculation", "C#", "Enthält die Daten der Steuerberechnung")
+        Component(UserEntity, "User", "C#", "Benutzer-Entität")
+    }
+
+    ' Application Layer: Steuerberechnungs- und Abfrage-Commands
+    Container_Boundary(ApplicationLayer, "Application Layer") {
+        Component(CalculateTaxCommandHandler, "Calculate Tax Command Handler", "C#", "Verarbeitet den Steuerberechnungsbefehl")
+        Component(TaxQueryHandler, "Tax Query Handler", "C#", "Verarbeitet Steuerabfragen")
+        Component(TaxRuleEngine, "Tax Rule Engine", "C#", "Berechnet die Steuern basierend auf den Steuerregeln")
+    }
+
+    ' Infrastructure Layer: Datenquellen und Speicherung der berechneten Steuern
+    Container_Boundary(InfrastructureLayer, "Infrastructure Layer") {
+        Component(AssetRepository, "Asset Repository", "C#", "Lädt Vermögenswerte aus der SQL-Datenbank")
+        Component(TaxResultRepository, "Tax Result Repository", "C#", "Speichert die berechneten Steuerergebnisse")
+        Component(SharedSQLDB, "SQL Database", "SQL", "Speichert Vermögenswerte und Steuerergebnisse in verschiedenen Tabellen", $tags="Database")
+        Component(KustoDB, "Kusto Tax Data", "Kusto", "Speichert API-Logs und große Steuerdatensätze", $tags="Database")
+    }
+}
+
+Person(EndUser, "End User", "Benutzer, der eine Steuerberechnung durchführen möchte")
+
+' Verbindungen
+Rel(EndUser, CalculateTaxCommandHandler, "Fordert die Berechnung der Steuer an")
+Rel(CalculateTaxCommandHandler, AssetRepository, "Lädt Vermögenswerte des Benutzers aus der SQL-Datenbank")
+Rel(AssetRepository, SharedSQLDB, "Lädt Vermögenswerte aus der SQL-Datenbank")
+Rel(CalculateTaxCommandHandler, TaxRuleEngine, "Verwendet Steuerregel-Engine zur Berechnung")
+Rel(CalculateTaxCommandHandler, TaxResultRepository, "Speichert berechnete Steuerergebnisse")
+Rel(TaxResultRepository, SharedSQLDB, "Speichert Steuerergebnisse in der SQL-Datenbank")
+Rel(TaxResultRepository, KustoDB, "Speichert große Steuerdatensätze in der Kusto-Datenbank")
+Rel(EndUser, TaxQueryHandler, "Fragt berechnete Steuern ab")
+Rel(TaxQueryHandler, TaxResultRepository, "Lädt berechnete Steuern aus der Datenbank")
+
+@enduml

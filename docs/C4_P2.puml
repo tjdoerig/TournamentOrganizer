@@ -1,0 +1,58 @@
+@startuml C4_P2
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+AddElementTag("AzureFunction", $shape=EightSidedShape(), $bgColor="CornflowerBlue", $fontColor="white", $legendText="Azure Function")
+AddElementTag("Database", $bgColor="LightGreen", $fontColor="black", $legendText="Database")
+
+Person(User, "User", "Schweizer Kunde, der seine Vermögenswerte verwaltet und Steuerauszüge erstellt")
+Person(Admin, "Admin", "Systemadministrator, verwaltet APIs und das System")
+
+Container_Boundary(s1, "SwissAssetReport System") {
+    Container(BlazorApp, "Web UI", "Blazor", "Frontend für die Verwaltung von Vermögenswerten, Tokens und Steuerauszugserstellung")
+    
+    Container_Boundary(Backend, "Backend Services") {
+        Container(APIGateway, "API Gateway", "C#", "Verarbeitet eingehende API-Anfragen, Zuordnung zu Benutzern und Tokens für API-Zugriff")
+        Container(DataProcessingService, "Datenverarbeitungslogik", "C#", "Normalisiert, validiert und verarbeitet die empfangenen Daten")
+        Container(ManualAssetsService, "Manuelle Vermögenswerte", "C#", "Verwaltet manuell hinzugefügte Namensaktien und harmonisiert sie mit den anderen Vermögenswerten")
+        Container(TokenManagementService, "Token-Management", "C#", "Verwaltet die dynamische Speicherung und Verwaltung von API-Tokens für Benutzer")
+        Container(TaxPreparationService, "Steuerliche Aufbereitung", "C#", "Bereitet die steuerlichen Daten auf, sobald der Benutzer den Steuerauszug anfordert")
+        Container(BackendDatabaseService, "Backend-Datenbank-Management", "C#", "Verwaltet den Zugriff auf SQL- und Kusto-Datenbanken")
+    }
+
+    Container(SQLDB, "Azure SQL DB", "SQL", "Relationale Datenbank zur Speicherung von Benutzerdaten, Vermögenswerten und Tokens", $tags="Database")
+    Container(KustoDB, "Azure Kusto", "Kusto", "Speicherung von API-Transaktionsdaten", $tags="Database")
+    Container(PDFGenerator, "PDF-Generator", "Azure Function", "Erstellt Steuerauszüge im PDF-Format")
+    Container(AuthService, "Authentifizierungslogik", "OAuth2", "Regelt den sicheren Zugriff und die Authentifizierung")
+}
+
+System_Ext(CryptoAPI, "Kryptowährungs-API", "Externe API zum Abrufen von Kryptowährungsdaten")
+System_Ext(StockAPI, "Aktien-API", "Externe API zum Abrufen von Aktien- und ETF-Daten")
+System_Ext(BankAPI, "Bank-API", "Externe API zur Integration von Bankdaten")
+System_Ext(OAuth2Providers, "OAuth2 Provider", "Google, Microsoft, GitHub und andere für Authentifizierung")
+
+' Verbindungen zu Backend Services
+Rel(User, BlazorApp, "Verwaltet seine Vermögenswerte und Tokens")
+Rel(Admin, Backend, "Überwacht und konfiguriert APIs")
+Rel(BlazorApp, AuthService, "Authentifizierung über OAuth2")
+Rel(AuthService, OAuth2Providers, "Authentifizierung", "OAuth2")
+Rel(BlazorApp, TokenManagementService, "Verwaltet Tokens für APIs")
+Rel(APIGateway, TokenManagementService, "Verwendet Benutzer-Tokens für API-Zugriff")
+Rel(APIGateway, DataProcessingService, "Leitet die empfangenen Daten weiter")
+Rel(DataProcessingService, BackendDatabaseService, "Speichert verarbeitete Daten")
+Rel(TaxPreparationService, BackendDatabaseService, "Liest verarbeitete Daten zur Steueraufbereitung")
+Rel(ManualAssetsService, BackendDatabaseService, "Speichert manuelle Vermögenswerte")
+Rel(BackendDatabaseService, SQLDB, "SQL-Datenzugriff")
+Rel(BackendDatabaseService, KustoDB, "Kusto-Datenzugriff")
+Rel(TaxPreparationService, PDFGenerator, "Sendet berechnete Steuerdaten zur PDF-Generierung")
+
+' Externe API-Verbindungen
+Rel(APIGateway, CryptoAPI, "Abrufen von Kryptowährungsdaten", "API")
+Rel(APIGateway, StockAPI, "Abrufen von Aktien- und ETF-Daten", "API")
+Rel(APIGateway, BankAPI, "Abrufen von Bankdaten", "API")
+
+' ** Notizen zur Architektur **
+note "Token-Management: Diese Komponente verwaltet die dynamische Speicherung der API-Tokens. Benutzer können 1-n Tokens für verschiedene Plattformen eingeben." as TokenMgmt
+TokenMgmt .. TokenManagementService
+
+SHOW_LEGEND()
+@enduml

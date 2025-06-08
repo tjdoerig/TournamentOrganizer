@@ -1,0 +1,30 @@
+@startuml C4_P1
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title System Context Diagram - SwissAssetReport
+
+Person(User, "User", "Schweizer Kunde, der einen Steuerauszug für seine Assets benötigt")
+Person(Admin, "Admin", "Systemadministrator, verwaltet die Plattform und APIs")
+
+Container_Boundary(s1, "SwissAssetReport System") {
+    System(SwissAssetReport, "SwissAssetReport", "Webanwendung zur automatischen Erstellung von Steuerauszügen für Schweizer Kunden")
+    Container(SQLDB, "Azure SQL DB", "Relationale Datenbank zur Speicherung von Benutzerdaten, Vermögenswerten und Konfigurationen")
+    Container(KustoDB, "Azure Kusto", "Speicherung von API-Transaktionsdaten")
+}
+
+System_Ext(CryptoAPI, "Kryptowährungs-API", "Externe API zum Abrufen von Kryptowährungsdaten")
+System_Ext(StockAPI, "Aktien-API", "Externe API zum Abrufen von Aktien- und ETF-Daten")
+System_Ext(BankAPI, "Bank-API", "Externe API zur Integration von Bankdaten")
+System_Ext(OAuth2Providers, "OAuth2 Provider", "Google, Microsoft, GitHub und andere für Authentifizierung")
+
+Rel(User, SwissAssetReport, "Verwaltet seine Vermögenswerte und erstellt Steuerauszüge")
+Rel(Admin, SwissAssetReport, "Verwaltet die Plattform und APIs")
+BiRel(SwissAssetReport, CryptoAPI, "Abrufen von Kryptowährungsdaten", "API")
+BiRel(SwissAssetReport, StockAPI, "Abrufen von Aktien- und ETF-Daten", "API")
+BiRel(SwissAssetReport, BankAPI, "Abrufen von Bankdaten", "API")
+Rel(SwissAssetReport, OAuth2Providers, "Benutzer-Authentifizierung", "OAuth2")
+Rel(SwissAssetReport, SQLDB, "Speichert Benutzerdaten und Vermögenswerte")
+Rel(SwissAssetReport, KustoDB, "Speichert API-Transaktionen")
+
+SHOW_LEGEND()
+@enduml
