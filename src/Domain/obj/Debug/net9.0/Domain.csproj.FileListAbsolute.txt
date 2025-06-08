@@ -1,0 +1,13 @@
+/workspaces/TournamentOrganizer/src/Domain/bin/Debug/net9.0/Domain.deps.json
+/workspaces/TournamentOrganizer/src/Domain/bin/Debug/net9.0/Domain.dll
+/workspaces/TournamentOrganizer/src/Domain/bin/Debug/net9.0/Domain.pdb
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/Domain.csproj.AssemblyReference.cache
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/Domain.AssemblyInfoInputs.cache
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/Domain.AssemblyInfo.cs
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/Domain.csproj.CoreCompileInputs.cache
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/Domain.sourcelink.json
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/Domain.dll
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/refint/Domain.dll
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/Domain.pdb
+/workspaces/TournamentOrganizer/src/Domain/obj/Debug/net9.0/ref/Domain.dll

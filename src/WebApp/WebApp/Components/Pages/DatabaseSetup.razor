@@ -1,0 +1,62 @@
+@page "/database-setup"
+@using Infrastructure.Data
+@inject DatabaseInitializer DatabaseInitializer
+@inject ILogger<DatabaseSetup> Logger
+
+<PageTitle>Datenbank Setup</PageTitle>
+
+<div class="container mt-4">
+    <h1>Datenbank Setup</h1>
+    
+    <div class="alert alert-info">
+        Klicken Sie auf den Button, um die Datenbank zu initialisieren.
+    </div>
+
+    <button class="btn btn-primary" @onclick="InitializeDatabase" disabled="@_isInitializing">
+        @if (_isInitializing)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span>Initialisiere...</span>
+        }
+        else
+        {
+            <span>Datenbank initialisieren</span>
+        }
+    </button>
+
+    @if (!string.IsNullOrEmpty(_message))
+    {
+        <div class="alert @(_isError ? "alert-danger" : "alert-success") mt-3">
+            @_message
+        </div>
+    }
+</div>
+
+@code {
+    private bool _isInitializing;
+    private string _message = string.Empty;
+    private bool _isError;
+
+    private async Task InitializeDatabase()
+    {
+        try
+        {
+            _isInitializing = true;
+            _message = string.Empty;
+            _isError = false;
+
+            await DatabaseInitializer.InitializeDatabaseAsync();
+            _message = "Datenbank wurde erfolgreich initialisiert!";
+        }
+        catch (Exception ex)
+        {
+            _isError = true;
+            _message = $"Fehler beim Initialisieren der Datenbank: {ex.Message}";
+            Logger.LogError(ex, "Fehler beim Initialisieren der Datenbank");
+        }
+        finally
+        {
+            _isInitializing = false;
+        }
+    }
+} 

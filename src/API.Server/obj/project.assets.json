@@ -1422,19 +1422,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/thomas/.nuget/packages/": {}
+    "/home/vscode/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/API.Server/API.Server.csproj",
+      "projectUniqueName": "/workspaces/TournamentOrganizer/src/API.Server/API.Server.csproj",
       "projectName": "API.Server",
-      "projectPath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/API.Server/API.Server.csproj",
-      "packagesPath": "/Users/thomas/.nuget/packages/",
-      "outputPath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/API.Server/obj/",
+      "projectPath": "/workspaces/TournamentOrganizer/src/API.Server/API.Server.csproj",
+      "packagesPath": "/home/vscode/.nuget/packages/",
+      "outputPath": "/workspaces/TournamentOrganizer/src/API.Server/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/thomas/.nuget/NuGet/NuGet.Config"
+        "/home/vscode/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1446,8 +1446,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/API.Client/API.Client.csproj": {
-              "projectPath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/API.Client/API.Client.csproj"
+            "/workspaces/TournamentOrganizer/src/API.Client/API.Client.csproj": {
+              "projectPath": "/workspaces/TournamentOrganizer/src/API.Client/API.Client.csproj"
             }
           }
         }
@@ -1461,7 +1461,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -1493,6 +1494,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.16, 8.0.16]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "version": "[8.0.16, 8.0.16]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.16, 8.0.16]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -1501,7 +1516,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

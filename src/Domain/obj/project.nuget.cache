@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "/CArfRJzsyQ=",
+  "dgSpecHash": "+v77nAxcrxE=",
   "success": true,
-  "projectFilePath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/Domain/Domain.csproj",
+  "projectFilePath": "/workspaces/TournamentOrganizer/src/Domain/Domain.csproj",
   "expectedPackageFiles": [
-    "/Users/thomas/.nuget/packages/mediatr/12.4.1/mediatr.12.4.1.nupkg.sha512",
-    "/Users/thomas/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
-    "/Users/thomas/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+    "/home/vscode/.nuget/packages/mediatr/12.4.1/mediatr.12.4.1.nupkg.sha512",
+    "/home/vscode/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/home/vscode/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

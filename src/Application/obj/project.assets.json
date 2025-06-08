@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {
+    "net9.0": {
       "FluentValidation/11.10.0": {
         "type": "package",
         "compile": {
@@ -82,7 +82,7 @@
       },
       "Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
+        "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "MediatR": "12.4.1"
         },
@@ -264,7 +264,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0": [
+    "net9.0": [
       "Domain >= 1.0.0",
       "FluentValidation >= 11.10.0",
       "MediatR >= 12.4.1",
@@ -272,32 +272,32 @@
     ]
   },
   "packageFolders": {
-    "/Users/thomas/.nuget/packages/": {}
+    "/home/vscode/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/Application/Application.csproj",
+      "projectUniqueName": "/workspaces/TournamentOrganizer/src/Application/Application.csproj",
       "projectName": "Application",
-      "projectPath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/Application/Application.csproj",
-      "packagesPath": "/Users/thomas/.nuget/packages/",
-      "outputPath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/Application/obj/",
+      "projectPath": "/workspaces/TournamentOrganizer/src/Application/Application.csproj",
+      "packagesPath": "/home/vscode/.nuget/packages/",
+      "outputPath": "/workspaces/TournamentOrganizer/src/Application/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/thomas/.nuget/NuGet/NuGet.Config"
+        "/home/vscode/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net8.0"
+        "net9.0"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/Domain/Domain.csproj": {
-              "projectPath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/Domain/Domain.csproj"
+            "/workspaces/TournamentOrganizer/src/Domain/Domain.csproj": {
+              "projectPath": "/workspaces/TournamentOrganizer/src/Domain/Domain.csproj"
             }
           }
         }
@@ -311,11 +311,12 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
+      "net9.0": {
+        "targetAlias": "net9.0",
         "dependencies": {
           "FluentValidation": {
             "target": "Package",
@@ -346,7 +347,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

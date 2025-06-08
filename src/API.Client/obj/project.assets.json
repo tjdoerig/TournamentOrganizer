@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "/Users/thomas/.nuget/packages/": {}
+    "/home/vscode/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/API.Client/API.Client.csproj",
+      "projectUniqueName": "/workspaces/TournamentOrganizer/src/API.Client/API.Client.csproj",
       "projectName": "API.Client",
-      "projectPath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/API.Client/API.Client.csproj",
-      "packagesPath": "/Users/thomas/.nuget/packages/",
-      "outputPath": "/Users/thomas/Documents/Privat/Softwareentwicklung/Github/TournamentOrganizer/src/API.Client/obj/",
+      "projectPath": "/workspaces/TournamentOrganizer/src/API.Client/API.Client.csproj",
+      "packagesPath": "/home/vscode/.nuget/packages/",
+      "outputPath": "/workspaces/TournamentOrganizer/src/API.Client/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/thomas/.nuget/NuGet/NuGet.Config"
+        "/home/vscode/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -43,7 +43,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net7.0": {
@@ -74,7 +75,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.300/RuntimeIdentifierGraph.json"
       }
     }
   }
