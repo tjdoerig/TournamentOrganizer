@@ -45,45 +45,9 @@
 ---
 
 ## 🏗️ Architektur
+![C4_P1](https://github.com/user-attachments/assets/5a017239-7a94-44de-bbb9-9b7026c04a75)
 
-Das folgende C4 System Context Diagramm zeigt die Hauptkomponenten und Benutzer der Plattform:
 
-```plantuml
-@startuml C4_TournamentOrganizer
-!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-
-title System Context Diagram - Tournament Organizer
-
-Person(SuperAdmin, "Super Admin", "Systemweiter Zugriff - verwaltet alles")
-Person(User, "Benutzer (authentifiziert)", "Organisator oder Teilnehmer mit Login")
-Person(Guest, "Gast (Öffentlicher Benutzer)", "Kann Teams anmelden und öffentliche Turnierinfos sehen")
-
-Container_Boundary(s1, "Tournament Organizer System") {
-    Container(WebApp, "Tournament Organizer", "Web-App zur Verwaltung von Turnieren")
-
-    Container(SQLDB, "SQL Server DB", "Speichert Benutzer, Turniere, Teams, Spiele")
-    Container(AuthService, "Auth (.NET Identity)", "Verwaltet Benutzer und Rollen")
-    Container(PDFService, "PDF Generator", "Erstellt PDF-Berichte und Spielpläne")
-}
-
-System_Ext(EmailService, "E-Mail-Dienst", "Sendet Turnierinformationen")
-System_Ext(CalendarAPI, "Kalender-API (optional)", "Synchronisiert Spieltermine")
-
-System_Ext(ZPLPrinter, "ZPL-Drucker", "Drucker, der ZPL-Befehle über Netzwerk empfängt")
-System_Ext(TimeMeasurement, "Zeitmessanlage (RS232)", "Gerät zur Zeitmessung, kommuniziert via RS232")
-
-Rel(SuperAdmin, WebApp, "Verwaltet alles")
-Rel(User, WebApp, "Erstellt und verwaltet Turniere und Teams")
-Rel(Guest, WebApp, "Meldet Teams an, sieht öffentliche Turniere")
-
-Rel(WebApp, SQLDB, "Speichert & liest Daten")
-Rel(WebApp, AuthService, "Authentifizierung & Rollen")
-Rel(WebApp, PDFService, "Erstellt PDFs")
-Rel(WebApp, EmailService, "Sendet E-Mails")
-Rel(WebApp, CalendarAPI, "Synchronisiert Termine")
-
-Rel(WebApp, ZPLPrinter, "Sendet ZPL-Druckaufträge", "ZPL")
-Rel(WebApp, TimeMeasurement, "Kommuniziert via RS232", "RS232")
 
 SHOW_LEGEND()
 @enduml
